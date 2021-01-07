@@ -350,7 +350,7 @@ AS_IF([test "x$with_locale" != xno],
 		[AC_DEFINE(USE_LOCALE,1,[Define if LOCALE support should be used])
 		AIDE_USE_LOCALE=""
 		compoptionstring="${compoptionstring}WITH_LOCALE\\n"
-dnl        	AC_DEFINE_UNQUOTED(LOCALEDIR,"$prefix/lib/locale",[Localedir to use])],
+		AC_DEFINE_UNQUOTED(LOCALEDIR,"$prefix/lib/locale",[Localedir to use])],
 	)]
 )
 

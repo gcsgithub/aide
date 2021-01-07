@@ -1,6 +1,6 @@
 # Maintainer: manjaro <manjaro-dev@garetech.com.au>
 pkgname=aide
-pkgver=0.16
+pkgver=0.16.2
 pkgrel="$( uname -r | cut -d\. -f1-2 )"
 epoch=
 pkgdesc="aide - Advanced Intrusion Detection Environment"

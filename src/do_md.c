@@ -199,20 +199,29 @@ void calc_md(struct stat* old_fs,db_line* line) {
   }
 #endif  
 
-#ifdef HAVE_O_NOATIME
+#ifdef O_NOATIME
   filedes=open(line->fullpath,O_RDONLY|O_NOATIME);
-  if(filedes<0)
+  if( filedes < 0 ) {
 #endif
+    char *er = strerror(errno);
+    log_msg( LOG_LEVEL_WARNING, 
+                "hash calculation: open() failed to open with O_NOATIME fallback to normal open for: %s:%s",
+                (line->fullpath)?line->fullpath:"unknown file",
+                (er)?er:"unknown error"
+    );
     filedes=open(line->fullpath,O_RDONLY);
-
+  }
   if (filedes==-1) {
     char* er=strerror(errno);
     if (er!=NULL) {
       log_msg(LOG_LEVEL_WARNING, "hash calculation: open() failed for %s: %s",
-	    line->fullpath,er);
-    } else {
+	          line->fullpath, er
+      );
+    }
+    else {
       log_msg(LOG_LEVEL_WARNING, "hash calculation: open() failed for %s: %i",
-	    line->fullpath,errno);
+	          line->fullpath, errno
+      );
     }
     /*
       Nop. Cannot cal hashes. Mark it.

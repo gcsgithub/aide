@@ -1,3 +1,7 @@
+2021-01-08  manjaro <manjaro-dev@garetech.com.au>
+        * fix manjaro to use O_NOATIME if the OS heads define O_NOATIME
+        * then assume we have it!
+
 2019-05-19  Hannes von Haugwitz  <hannes@vonhaugwitz.com>
 	* Release version 0.16.2
 

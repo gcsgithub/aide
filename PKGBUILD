@@ -1,6 +1,6 @@
 # Maintainer: manjaro <manjaro-dev@garetech.com.au>
 pkgname=aide
-pkgver=0.16.2
+pkgver=0.16
 pkgrel="$( uname -r | cut -d\. -f1-2 )"
 epoch=
 pkgdesc="aide - Advanced Intrusion Detection Environment"
@@ -19,13 +19,12 @@ backup=("etc/aide.conf")
 options=()
 install=
 changelog=
-source=(git+${url}#branch=master)
+source=(git+${url}#branch=feature/soedev-manjaro-arm)
 noextract=()
 md5sums=("SKIP")
 validpgpkeys=()
 
 pkgver() {
-  # ver="2.4.6-36-g4eb2bb9"
         pkgver="$( cd "${srcdir}/${pkgname}" && git describe  | cut -d\- -f1)"
         [ "${pkgver:0:1}" = "v" ]  && pkgver="${pkgver:1}"
         echo "${pkgver}"
@@ -43,41 +42,41 @@ build() {
         LOCALSTATEDIR=""
         DATAROOTDIR=${EPREFIX}/share
 
-        ./configure                                     \
-                     --prefix=/                         \
-                     --exec-prefix=/usr                 \
-                     --bindir=${EPREFIX}/bin            \
-                     --sbindir=${EPREFIX}/sbin          \
-                     --libexecdir=${EPREFIX}/libexec    \
-                     --sysconfdir=${PREFIX}/etc         \
-                     --sharedstatedir=${PREFIX}/com     \
-                     --localstatedir=${PREFIX}/var      \
-                     --runstatedir=${LOCALSTATEDIR}/run \
-                     --libdir=${EPREFIX}/lib            \
-                     --includedir=${EPREFIX}/include    \
-                     --oldincludedir=/usr/include       \
-                     --datarootdir=${EPREFIX}/share     \
-                     --datadir=${DATAROOTDIR}           \
-                     --infodir=${DATAROOTDIR}/info      \
-                     --localedir=${DATAROOTDIR}/locale  \
-                     --mandir=${DATAROOTDIR}/man        \
-                     --docdir=${DATAROOTDIR}/doc/aide   \
+        ./configure                                      \
+                     --prefix=/                          \
+                     --exec-prefix=/usr                  \
+                     --bindir=${EPREFIX}/bin             \
+                     --sbindir=${EPREFIX}/sbin           \
+                     --libexecdir=${EPREFIX}/libexec     \
+                     --sysconfdir=${PREFIX}/etc          \
+                     --sharedstatedir=${PREFIX}/com      \
+                     --localstatedir=${PREFIX}/var       \
+                     --runstatedir=${LOCALSTATEDIR}/run  \
+                     --libdir=${EPREFIX}/lib             \
+                     --includedir=${EPREFIX}/include     \
+                     --oldincludedir=/usr/include        \
+                     --datarootdir=${EPREFIX}/share      \
+                     --datadir=${DATAROOTDIR}            \
+                     --infodir=${DATAROOTDIR}/info       \
+                     --localedir=${DATAROOTDIR}/locale   \
+                     --mandir=${DATAROOTDIR}/man         \
+                     --docdir=${DATAROOTDIR}/doc/aide    \
                      \
-                       --disable-static                   \
+                     --disable-static                    \
                      \
-                       --with-config-file="/etc/aide.conf" \
-                       --with-mmap                \
-                       --with-posix-acl           \
-                       --with-prelink             \
-                       --with-xattr               \
-                       --with-e2fsattrs           \
-                       --with-zlib                \
-                       --with-gcrypt              \
-                       --with-audit               \
+                     --with-config-file="/etc/aide.conf" \
+                     --with-mmap                         \
+                     --with-posix-acl                    \
+                     --with-prelink                      \
+                     --with-xattr                        \
+                     --with-e2fsattrs                    \
+                     --with-zlib                         \
+                     --with-gcrypt                       \
+                     --with-audit                        \
                      \
-                       --with-locale              \
-                       --with-curl                \
-                       --without-mhash
+                     --with-locale                       \
+                     --with-curl                         \
+                     --without-mhash
         make
 }
 
@@ -92,5 +91,5 @@ package() {
         mkdir           "${pkgdir}/etc"
         chown root:root "${pkgdir}/etc"
         chmod 755       "${pkgdir}/etc"
-        /usr/bin/install -c -m 644 etc/aide.conf "${pkgdir}/etc/aide.conf"
+        /usr/bin/install -c -m 644 "./contrib/aide.conf" "${pkgdir}/etc/aide.conf"
 }

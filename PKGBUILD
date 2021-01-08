@@ -19,7 +19,7 @@ backup=("etc/aide.conf")
 options=()
 install=
 changelog=
-branch="feature/soedev-manjaro-arm"
+branch="master"
 source=(git+${url}#branch=${branch})
 noextract=()
 md5sums=("SKIP")

@@ -1,7 +1,7 @@
 # Maintainer: manjaro <manjaro-dev@garetech.com.au>
 pkgname=aide
 pkgver=0.16.2
-pkgrel="$( uname -r | cut -d\. -f1-2 )"
+pkgrel=54
 epoch=
 pkgdesc="aide - Advanced Intrusion Detection Environment"
 arch=(aarch64 x86_64)
@@ -19,7 +19,8 @@ backup=("etc/aide.conf")
 options=()
 install=
 changelog=
-source=(git+${url}#branch=feature/soedev-manjaro-arm)
+branch="feature/soedev-manjaro-arm"
+source=(git+${url}#branch=${branch})
 noextract=()
 md5sums=("SKIP")
 validpgpkeys=()
